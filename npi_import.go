@@ -129,17 +129,3 @@ func main() {
 	}
 
 }
-
-func checkCount(rows *sql.Rows) (count int) {
-	for rows.Next() {
-		err:= rows.Scan(&count)
-		checkErr(err)
-	}
-	return count
-}
-
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
