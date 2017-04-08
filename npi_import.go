@@ -27,6 +27,7 @@ func main() {
 	}
 
 	// fields we want to record
+	// really just interested in the key, but the value helps the reader know the fieldnames of interest
 	allowedFields := make(map[int]string)
 	allowedFields[0] = "npi"
 	allowedFields[4] = "legal_business_name"
