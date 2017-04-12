@@ -9,12 +9,20 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"strconv"
+	"flag"
 )
 
 func main() {
 
+	var input = flag.String("file", "", "file the be parsed")
+	var userName = flag.String("user", "", "db username")
+	var password = flag.String("pass", "", "db password")
+	var databaseName = flag.String("db", "", "db name")
+	flag.Parse()
+
 	// open connection to db
-	db, err := sql.Open("mysql", "root:@/linksmd")
+	connectionString := fmt.Sprintf("%s:%s@/%s", userName, password, databaseName)
+	db, err := sql.Open("mysql", connectionString)
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
 	}
@@ -80,7 +88,7 @@ func main() {
 	defer stmtIns.Close() // Close the statement when we leave main() / the program terminates
 
 	// open a file, /tmp/test/txt
-	if file, err := os.Open("/Users/jose/Downloads/NPPES_Data_Dissemination_March_2017/npidata_20050523-20170312.csv"); err == nil {
+	if file, err := os.Open(*input); err == nil {
 
 		// make sure it gets closed
 		defer file.Close()
