@@ -21,7 +21,7 @@ func main() {
 	flag.Parse()
 
 	// open connection to db
-	connectionString := fmt.Sprintf("%s:%s@/%s", userName, password, databaseName)
+	connectionString := fmt.Sprintf("%s:%s@/%s", *userName, *password, *databaseName)
 	db, err := sql.Open("mysql", connectionString)
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
