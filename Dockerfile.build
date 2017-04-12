@@ -1,0 +1,17 @@
+FROM ubuntu:16.04
+
+RUN apt-get -qq update
+RUN apt-get install -y wget
+
+ENV GOVERSION 1.7.4
+
+RUN wget https://storage.googleapis.com/golang/go${GOVERSION}.linux-amd64.tar.gz
+RUN tar -xvf go${GOVERSION}.linux-amd64.tar.gz
+RUN mv go /usr/local
+RUN ln -s /usr/local/go/bin/go /usr/bin/go
+
+ENV GOROOT /usr/local/go
+ENV GOPATH /root/go
+
+#ENTRYPOINT [ "/usr/bin/go" ]
+
